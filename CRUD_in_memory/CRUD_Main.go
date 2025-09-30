@@ -24,7 +24,7 @@ func createBook() Book {
 	fmt.Print("Digite o autor do livro: ")
 	fmt.Scanln(&author)
 	fmt.Print("Digite o ano de publicação do livro: ")
-	fmt.Scan(&year)
+	fmt.Scanln(&year)
 
 	newBook := Book{
 		Id:     id,
@@ -117,37 +117,40 @@ func main() {
 			var id string
 			fmt.Scanln(&id)
 			book, err := repo.findById(id)
-			if err == nil {
-				fmt.Print("Livro encontrado: ", *book)
+			if err != nil {
+				fmt.Println("Deu erro")
 			}
+			fmt.Print("Livro encontrado: ", *book)
 
 		case 4:
 			fmt.Print("Digite o Id do livro a se atualizar: ")
 			var id string
 			fmt.Scanln(&id)
 			book, err := repo.findById(id)
-			if err == nil {
-				var newid, newtitle, newauthor string
-				var newyear int
-				fmt.Print("Digite o Id do livro: ")
-				fmt.Scanln(&newid)
-				fmt.Print("Digite o título do livro: ")
-				fmt.Print()
-				fmt.Scanln(&newtitle)
-				fmt.Print("Digite o autor do livro: ")
-				fmt.Scanln(&newauthor)
-				fmt.Print("Digite o ano de publicação do livro: ")
-				fmt.Scanln(&newyear)
-				updateBook(book, newid, newtitle, newauthor, newyear)
+			if err != nil {
+				fmt.Println("Deu erro")
 			}
+			var newid, newtitle, newauthor string
+			var newyear int
+			fmt.Print("Digite o Id do livro: ")
+			fmt.Scanln(&newid)
+			fmt.Print("Digite o título do livro: ")
+			fmt.Print()
+			fmt.Scanln(&newtitle)
+			fmt.Print("Digite o autor do livro: ")
+			fmt.Scanln(&newauthor)
+			fmt.Print("Digite o ano de publicação do livro: ")
+			fmt.Scanln(&newyear)
+			updateBook(book, newid, newtitle, newauthor, newyear)
 		case 5:
 			fmt.Print("Digite o Id do livro a ser removido: ")
 			var id string
 			fmt.Scanln(&id)
 			_, err := repo.findById(id)
-			if err == nil {
-				repo.removeBook(id)
+			if err != nil {
+				fmt.Println("Deu erro")
 			}
+			repo.removeBook(id)
 		case 6:
 			return
 		default:
